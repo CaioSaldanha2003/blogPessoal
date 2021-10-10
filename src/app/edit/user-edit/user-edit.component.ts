@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/model/User';
+import { AlertasService } from 'src/app/service/alertas.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { environment } from 'src/environments/environment.prod';
 
@@ -19,7 +20,8 @@ export class UserEditComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertas: AlertasService
   ) { }
 
   ngOnInit(){
@@ -27,7 +29,7 @@ export class UserEditComponent implements OnInit {
     window.scroll(0,0)
 
     if(environment.token == ''){
-      alert("Sua sessão expirou meu chapa")
+      this.alertas.showAlertInfo("Sua sessão expirou meu chapa")
       this.router.navigate(["/entrar"])
     }
 
@@ -47,11 +49,11 @@ export class UserEditComponent implements OnInit {
       this.user.tipo = this.tipoUsuario
 
     if(this.user.senha != this.confirmarSenha){
-      alert("As senhas estão incorretas")
+      this.alertas.showAlertDanger("As senhas estão incorretas")
     } else {
       this.authService.atualizar(this.user).subscribe((resp: User) => {
         this.user = resp
-        alert("Foi atualizadinho mulekote!!!, agora logue dnv")
+        this.alertas.showAlertSuccess("Foi atualizadinho mulekote!!!, agora logue dnv")
         this.router.navigate(["/inicio"])
         environment.token = ''
         environment.nome = ''
