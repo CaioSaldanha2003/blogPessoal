@@ -27,6 +27,11 @@ export class TemaComponent implements OnInit {
       this.router.navigate(["/entrar"])
     }
 
+    if(environment.tipo != 'adm'){
+      this.alertas.showAlertInfo('Bro, tu precisa ser adeemi pra acessar isso :C')
+      this.router.navigate(['/inicio'])
+    }
+
     this.findAllTemas()
   }
 
