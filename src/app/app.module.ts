@@ -21,6 +21,7 @@ import { UserEditComponent } from './edit/user-edit/user-edit.component';
 import { AlertasComponent } from './alertas/alertas.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { OrderModule } from 'ngx-order-pipe';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { OrderModule } from 'ngx-order-pipe';
     HttpClientModule,
     FormsModule,
     ModalModule.forRoot(),
-    OrderModule
+    OrderModule,
+    NoopAnimationsModule
   ],
   providers: [{
     provide: LocationStrategy,
